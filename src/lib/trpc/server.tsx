@@ -8,8 +8,7 @@ import {
 } from "@trpc/tanstack-react-query";
 import { appRouter } from "@/server/api/root";
 import { createTRPCContext } from "@/server/api/trpc";
-import { createQueryClient } from "./query-client";
-import { isServer } from "@tanstack/react-query";
+import { getQueryClient } from "./query-client";
 
 /**
  * This wraps the `createTRPCContext` helper and provides the required context for the tRPC API when
@@ -23,18 +22,6 @@ const createContext = cache(async () => {
         headers: heads,
     });
 });
-
-let browserQueryClient: ReturnType<typeof createQueryClient> | undefined;
-export const getQueryClient = () => {
-    if(isServer) {
-        return createQueryClient()
-    }
-
-    if(!browserQueryClient) {
-        browserQueryClient = createQueryClient()
-    }
-    return browserQueryClient
-}
 
 /**
  * Det er den her, som skal bruges til at kalde tRPC fra en React Server Component.
