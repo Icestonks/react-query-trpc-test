@@ -1,3 +1,7 @@
+# Hydration Bug
+When prefetching and using normal useQuery, you will get hydration errors. 
+Just run it locally in dev, and there should come hydrations errors.
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
