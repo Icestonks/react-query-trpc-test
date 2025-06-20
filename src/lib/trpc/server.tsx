@@ -3,12 +3,10 @@ import "server-only";
 import { headers } from "next/headers";
 import { cache } from "react";
 
-import {
-    createTRPCOptionsProxy,
-} from "@trpc/tanstack-react-query";
+import { createTRPCOptionsProxy } from "@trpc/tanstack-react-query";
 import { appRouter } from "@/server/api/root";
 import { createTRPCContext } from "@/server/api/trpc";
-import { getQueryClient } from "./query-client";
+import { createQueryClient } from "./query-client";
 
 /**
  * This wraps the `createTRPCContext` helper and provides the required context for the tRPC API when
@@ -22,6 +20,8 @@ const createContext = cache(async () => {
         headers: heads,
     });
 });
+
+export const getQueryClient = cache(createQueryClient);
 
 /**
  * Det er den her, som skal bruges til at kalde tRPC fra en React Server Component.

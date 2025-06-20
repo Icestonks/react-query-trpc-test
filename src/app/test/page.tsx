@@ -1,13 +1,14 @@
 import React from "react";
 import { HydrationBoundary, dehydrate } from "@tanstack/react-query";
 import PageClient from "./page-client";
-import { trpc } from "@/lib/trpc/server";
-import { createQueryClient } from "@/lib/trpc/query-client";
+import { getQueryClient, trpc } from "@/lib/trpc/server";
 
 export default function page() {
-    const queryClient = createQueryClient()
+    const queryClient = getQueryClient();
 
-    void queryClient.prefetchQuery(trpc.users.getAmountOfUsers.queryOptions({}));
+    void queryClient.prefetchQuery(
+        trpc.users.getAmountOfUsers.queryOptions({})
+    );
 
     return (
         <HydrationBoundary state={dehydrate(queryClient)}>
