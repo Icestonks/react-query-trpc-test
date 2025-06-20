@@ -23,11 +23,6 @@ const createContext = cache(async () => {
 
 export const getQueryClient = cache(createQueryClient);
 
-/**
- * Det er den her, som skal bruges til at kalde tRPC fra en React Server Component.
- * Der bliver ikke cachet noget af dette over til clienten, så det er kun til serveren.
- * https://trpc.io/docs/client/tanstack-react-query/server-components#getting-data-in-a-server-component
- */
 export const caller = appRouter.createCaller(createContext);
 
 export const trpc = createTRPCOptionsProxy({
