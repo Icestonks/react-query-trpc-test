@@ -1,21 +1,19 @@
-import { getQueryClient, trpc } from "@/lib/trpc/server";
 import { HydrationBoundary, dehydrate } from "@tanstack/react-query";
-import PageClient from "./page-client";
 import Link from "next/link";
+import { getAmountOfUsers } from "./fetcher";
+import PageClient from "./page-client";
+import { getQueryClient } from "@/lib/server/getQueryClient";
 
 export default async function Page() {
-    // prefetch(trpc.users.getAmountOfUsers.queryOptions());
-    const queryClient = getQueryClient();
+  const queryClient = getQueryClient();
 
-    void queryClient.prefetchQuery(
-        trpc.users.getAmountOfUsers.queryOptions({})
-    );
+  void queryClient.prefetchQuery(getAmountOfUsers());
 
-    return (
-        <HydrationBoundary state={dehydrate(queryClient)}>
-            Test data:
-            <Link href={"/test"}>Test Page</Link>
-            <PageClient />
-        </HydrationBoundary>
-    );
+  return (
+    <HydrationBoundary state={dehydrate(queryClient)}>
+      Test data:
+      <Link href={"/test"}>Test Page</Link>
+      <PageClient />
+    </HydrationBoundary>
+  );
 }

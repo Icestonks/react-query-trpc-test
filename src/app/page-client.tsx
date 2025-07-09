@@ -1,15 +1,14 @@
 "use client";
-import { useTRPC } from "@/lib/trpc/react";
+
 import { useQuery } from "@tanstack/react-query";
+import { getAmountOfUsers } from "./fetcher";
 
 const PageClient = ({}) => {
-    const trpc = useTRPC();
+  const { data, isLoading } = useQuery(getAmountOfUsers());
 
-    const { data, isLoading } = useQuery(
-        trpc.users.getAmountOfUsers.queryOptions({})
-    );
-
-    return <div>Amount of users: {isLoading ? "0" : data?.amount}</div>;
+  return (
+    <div>Amount of users: {isLoading ? <em>Loading...</em> : data?.amount}</div>
+  );
 };
 
 export default PageClient;
