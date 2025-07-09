@@ -2,10 +2,10 @@ import { HydrationBoundary, dehydrate } from "@tanstack/react-query";
 import Link from "next/link";
 import { getAmountOfUsers } from "./fetcher";
 import PageClient from "./page-client";
-import { getQueryClient } from "@/lib/server/getQueryClient";
+import { getServerQueryClient } from "@/lib/server/getQueryClient";
 
 export default async function Page() {
-  const queryClient = getQueryClient();
+  const queryClient = getServerQueryClient();
 
   void queryClient.prefetchQuery(getAmountOfUsers());
 
