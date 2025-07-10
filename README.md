@@ -1,4 +1,5 @@
 # Hydration Bug
+
 When prefetching and using normal useQuery, you will get hydration errors. 
 Just run it locally in dev, and there should come hydrations errors.
 
